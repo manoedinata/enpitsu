@@ -51,6 +51,12 @@ services:
       SPECIAL_ADMIN_USERS: ${ENPITSU_SPECIAL_ADMIN_USERS}
     ports:
       - 3000:3000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/about"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
   processor:
     container_name: enpitsu_question_processor
